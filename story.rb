@@ -6,14 +6,14 @@ class Story < Chapter
   def initialize
     story_start
     
-    story03
+    story04
     
     story_end
   end
   
   # なんかデータベースの作成とか開いたりとか
   def story_start
-    @db = SQLite3::Database.new "test.db"
+    @db = SQLite3::Database.new "SQL_Drill.db"
   end
   
   # .exit的なやつ
@@ -48,6 +48,14 @@ class Story < Chapter
       p low
     end
   end
+  
+  def story04
+    @db.transaction do
+      sql = "insert into Customers values (?, ?, ?, ?, ?, ?)"
+      @db.execute(sql, "1", "2001", "タマ", "江戸川区下小岩", "2", "13")
+    end
+  end
+  
 end
 
 Story.new
